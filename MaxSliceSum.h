@@ -32,30 +32,30 @@ using namespace std;
 /*
  int solution(vector<int> &A)
  {
- const int size = static_cast<int>(A.size());
- vector<long long> prefixSums(size, 0);
- 
- prefixSums[0] = A[0];
- for (int i = 1; i < size; ++i)
- {
- prefixSums[i] = prefixSums[i - 1] + A[i];
+     const int size = static_cast<int>(A.size());
+     vector<long long> prefixSums(size, 0);
+     
+     prefixSums[0] = A[0];
+     for (int i = 1; i < size; ++i)
+     {
+         prefixSums[i] = prefixSums[i - 1] + A[i];
+     }
+     
+     long long minPrefixSumTillCurrent = 0;
+     long long maxSliceSum = A[0];
+     
+     for (int i = 0; i < size; ++i)
+     {
+         maxSliceSum = max(maxSliceSum, prefixSums[i] - minPrefixSumTillCurrent);
+         minPrefixSumTillCurrent = min(minPrefixSumTillCurrent, prefixSums[i]);
+     }
+     
+     return static_cast<int>(maxSliceSum);
  }
- 
- long long minPrefixSumTillCurrent = 0;
- long long maxSliceSum = A[0];
- 
- for (int i = 0; i < size; ++i)
- {
- maxSliceSum = max(maxSliceSum, prefixSums[i] - minPrefixSumTillCurrent);
- minPrefixSumTillCurrent = min(minPrefixSumTillCurrent, prefixSums[i]);
- }
- 
- return static_cast<int>(maxSliceSum);
- }
- */
+*/
 
 
-/* Kadane's algo (dynamic porogramming) - better solution O(N) time and O(1) memory complexity */
+/* Kadane's algo (dynamic programming) - better solution O(N) time and O(1) memory complexity */
 int solution(vector<int> &A)
 {
     const int size = static_cast<int>(A.size());

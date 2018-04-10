@@ -66,8 +66,8 @@ int solution(vector<int> &A)
         {
             position = nextPeakIndex[position];
             
-            // no more peaks available
-            if (position == -1)
+            const bool noMorePeakAvailable = position == -1;
+            if (noMorePeakAvailable)
             {
                 break;
             }

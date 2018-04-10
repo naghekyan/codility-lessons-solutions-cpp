@@ -24,7 +24,7 @@ using namespace std;
 
 int solution(vector<int> &A)
 {
-    multiset<int> unique;
+    set<int> unique;
     for (auto elem : A)
     {
         unique.insert(elem);

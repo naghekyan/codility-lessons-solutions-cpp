@@ -25,6 +25,7 @@
 #include <queue>
 using namespace std;
 
+// see lesson Dominator
 int getLeaderIndex(vector<int> &A)
 {
     const int size = static_cast<int>(A.size());
