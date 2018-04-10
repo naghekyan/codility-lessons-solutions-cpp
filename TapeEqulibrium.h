@@ -16,23 +16,25 @@
 #include <set>
 #include <map>
 #include <unordered_map>
+#include <limits>
 using namespace std;
 
 
-int solution(vector<int> &A) {
+int solution(vector<int> &A)
+{
     const int sum = std::accumulate(A.begin(), A.end(), 0);
-    std::set<int> diffs;
+    int minDiff = numeric_limits<int>::max();
     
     int prevSum = A[0];
-    for (int i = 1; i < A.size(); ++i)
+    for (int i = 1; i < static_cast<int>(A.size()); ++i)
     {
         int postSum = sum - prevSum;
         int diff = abs(prevSum - postSum);
-        diffs.insert(diff);
+        minDiff = min(minDiff, diff);
         prevSum += A[i];
     }
     
-    return *(diffs.begin());
+    return minDiff;
 }
 
 #endif /* TapeEqulibrium_h */

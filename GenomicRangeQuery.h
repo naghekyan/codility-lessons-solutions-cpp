@@ -23,61 +23,36 @@ using namespace std;
 
 int getImpactFactor(char a)
 {
-    switch (a)
-    {
-        case 'A':
-            return 1;
-        case 'C':
-            return 2;
-        case 'G':
-            return 3;
-        case 'T':
-            return 4;
-    }
-    
-    return -1; // OK, compiler, I will return a value here too, just shut up!
+    static unordered_map<char, int> impactFactor{{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
+    return impactFactor[a];
 }
 
 vector<int> solution(string &S, vector<int> &P, vector<int> &Q)
 {
     const int strSize = static_cast<int>(S.size());
+    unordered_map<char, int> counters;
     
-    int counterA = 0;
-    int counterC = 0;
-    int counterG = 0;
-    int counterT = 0;
+    const vector<int> forInitialization(strSize, 0);
+    map<char, vector<int>> countOfNucleotideTillIndex{
+        {'A', forInitialization},
+        {'C', forInitialization},
+        {'G', forInitialization},
+        {'T', forInitialization}
+    };
     
-    vector<int> countOfATillIndex(strSize, 0);
-    vector<int> countOfCTillIndex(strSize, 0);
-    vector<int> countOfGTillIndex(strSize, 0);
-    vector<int> countOfTTillIndex(strSize, 0);
     
     for (int i = 0; i < strSize; ++i)
     {
         const char elem = S[i];
+        ++counters[elem];
         
-        switch (elem)
+        for (auto& elem : countOfNucleotideTillIndex)
         {
-            case 'A':
-                ++counterA;
-                break;
-            case 'C':
-                ++counterC;
-                break;
-            case 'G':
-                ++counterG;
-                break;
-            case 'T':
-                ++counterT;
-                break;
+            const char nucleotide = elem.first;
+            auto& countTillIndex = elem.second;
+            countTillIndex[i] = counters[nucleotide];
         }
-        
-        countOfATillIndex[i] = counterA;
-        countOfCTillIndex[i] = counterC;
-        countOfGTillIndex[i] = counterG;
-        countOfTTillIndex[i] = counterT;
     }
-    
     
     const int rangeCount = static_cast<int>(P.size());
     vector<int> results(rangeCount, 0);
@@ -89,28 +64,25 @@ vector<int> solution(string &S, vector<int> &P, vector<int> &Q)
         
         if (rangeEnd - rangeStart == 0)
         {
-            results[i] =getImpactFactor(S[rangeStart]);
+            results[i] = getImpactFactor(S[rangeStart]);
         }
-        else if (countOfATillIndex[rangeEnd] - countOfATillIndex[rangeStart] > 0 || S[rangeStart] == 'A')
+        else
         {
-            results[i] = getImpactFactor('A');
-        }
-        else if (countOfCTillIndex[rangeEnd] - countOfCTillIndex[rangeStart] > 0 || S[rangeStart] == 'C')
-        {
-            results[i] = getImpactFactor('C');
-        }
-        else if (countOfGTillIndex[rangeEnd] - countOfGTillIndex[rangeStart] > 0 || S[rangeStart] == 'G')
-        {
-            results[i] = getImpactFactor('G');
-        }
-        else if (countOfTTillIndex[rangeEnd] - countOfTTillIndex[rangeStart] > 0 || S[rangeStart] == 'T')
-        {
-            results[i] = getImpactFactor('T');
+            for (auto& elem : countOfNucleotideTillIndex)
+            {
+                const char nucleotide = elem.first;
+                auto& countTillIndex = elem.second;
+                
+                if (countTillIndex[rangeEnd] - countTillIndex[rangeStart] > 0 || S[rangeStart] == nucleotide)
+                {
+                    results[i] = getImpactFactor(nucleotide);
+                    break;
+                }
+            }
         }
     }
     
     return results;
 }
-
 
 #endif /* GenomicRangeQuery_h */

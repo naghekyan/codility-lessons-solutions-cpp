@@ -21,7 +21,8 @@
 using namespace std;
 
 
-int solution(vector<int> &A) {
+int solution(vector<int> &A)
+{
     unordered_set<int> values;
     
     for (auto elem : A)

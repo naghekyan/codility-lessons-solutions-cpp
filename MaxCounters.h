@@ -22,7 +22,8 @@ using namespace std;
 
 
 
-vector<int> solution(int N, vector<int> &A) {
+vector<int> solution(int N, vector<int> &A)
+{
     vector<int> counters(N, 0);
     int counterMaxValue = 0;
     int bias = 0;
@@ -42,7 +43,7 @@ vector<int> solution(int N, vector<int> &A) {
         }
     }
     
-    for (auto& counter : counters)
+    for (auto counter : counters)
     {
         if (counter < bias)
         {

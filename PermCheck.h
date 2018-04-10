@@ -20,7 +20,8 @@
 #include <unordered_set>
 using namespace std;
 
-int solution(vector<int> &A) {
+int solution(vector<int> &A)
+{
     unordered_map<int, int> valueToCount;
     int max = 0;
     

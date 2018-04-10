@@ -19,7 +19,8 @@
 #include <unordered_map>
 using namespace std;
 
-int solution(int X, int Y, int D) {
+int solution(int X, int Y, int D)
+{
     return std::ceil(static_cast<double>(Y - X) / D);
 }
 

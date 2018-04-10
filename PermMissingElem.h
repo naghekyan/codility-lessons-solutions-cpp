@@ -20,20 +20,12 @@
 #include <unordered_set>
 using namespace std;
 
-int solution(vector<int> &A) {
-    unordered_set<int> values;
-    for (int i = 1; i <= A.size() + 1; ++i)
-    {
-        values.insert(i);
-    }
-    
-    for (auto elem : A)
-    {
-        auto it = values.find(elem);
-        values.erase(it);
-    }
-    
-    return *(values.begin());
+int solution(vector<int> &A)
+{
+    const long long size = static_cast<long long>(A.size());
+    const long long sum = accumulate(A.begin(), A.end(), 0L);
+    const long long arithmeticProgressionSum = (1 + (size + 1)) * (size + 1) / 2;
+    return arithmeticProgressionSum - sum;
 }
 
 #endif /* PermMissingElem_h */

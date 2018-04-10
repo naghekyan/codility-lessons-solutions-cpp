@@ -9,8 +9,8 @@
 #ifndef PassingCars_h
 #define PassingCars_h
 
-int solution(vector<int> &A) {
-    
+int solution(vector<int> &A)
+{
     int countOfOnes = 0;
     int pairCount = 0;
     

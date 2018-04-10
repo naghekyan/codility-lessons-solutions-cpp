@@ -16,9 +16,11 @@
 #include <unordered_map>
 using namespace std;
 
-std::unordered_map<int, int> valuesToCount;
 
-int solution(vector<int> &A) {
+int solution(vector<int> &A)
+{
+    std::unordered_map<int, int> valuesToCount;
+    
     for (auto elem : A)
     {
         valuesToCount[elem]++;

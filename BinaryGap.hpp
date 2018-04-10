@@ -26,7 +26,6 @@ std::string getBits(int n)
         oneBit = oneBit << 1;
     }
     
-    //std::reverse(result.begin(), result.end());
     return result;
 }
 

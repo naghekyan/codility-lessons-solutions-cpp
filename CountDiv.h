@@ -22,7 +22,8 @@ using namespace std;
 
 
 
-int solution(int A, int B, int K) {
+int solution(int A, int B, int K)
+{
     /*
      version 1
      const int firstDividableInRange = A % K == 0 ? A : A + (K - A % K);
@@ -31,7 +32,11 @@ int solution(int A, int B, int K) {
      */
     
     // version 2
-    return B / K - A / K + (A % K == 0 ? 1 : 0);
+    const int countTillA = A / K;
+    const int countTillB = B / K;
+    const int isADividable = A % K == 0;
+    
+    return countTillB - countTillA + (isADividable ? 1 : 0);
 }
 
 #endif /* CountDiv_h */
